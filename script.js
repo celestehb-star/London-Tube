@@ -5,7 +5,7 @@ const map = L.map('map', {
 L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png')
   .addTo(map);
 
-fetch('london_tube_schematic.geojson')
+fetch('./london_tube_schematic.geojson')
   .then(response => response.json())
   .then(data => {
     L.geoJSON(data, {
