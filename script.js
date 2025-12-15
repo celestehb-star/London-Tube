@@ -7,16 +7,18 @@ const map = new mapboxgl.Map({
   zoom: 10
 });
 
-// Wait until map loads
 map.on('load', () => {
-  // Fetch your existing GeoJSON file
-  fetch('tube_lines.geojson') // make sure the filename matches exactly
+  // Load your existing GeoJSON Tube lines
+  fetch('tube_lines.geojson') // make sure this matches your file name
     .then(response => response.json())
     .then(data => {
       // Add the GeoJSON as a source
-      map.addSource('tubeLines', { type: 'geojson', data: data });
+      map.addSource('tubeLines', {
+        type: 'geojson',
+        data: data
+      });
 
-      // Add a line layer to draw your Tube lines
+      // Draw the lines on the map
       map.addLayer({
         id: 'tubeLinesLayer',
         type: 'line',
@@ -26,7 +28,7 @@ map.on('load', () => {
           'line-cap': 'round'
         },
         paint: {
-          'line-color': ['get', 'color'], // assumes each feature has a "color" property
+          'line-color': ['get', 'color'], // uses color from GeoJSON property
           'line-width': 5
         }
       });
